@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lampu Natal</title>
+    <style>
+        .lingkaran{
+            height: 100px;
+            width: 100px;
+            margin: 0px 10px 0px 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: inline-block;
+            transition: 1s all ease;
+        }
+        .satu{
+            background-color: #c0392b;
+            animation: glow-1 1s infinite;
+        }
+        .dua{
+            background-color: #f1c40f;
+            animation: glow-2 1s infinite;
+        }
+        .tiga{
+            background-color: #64fcfe;
+            animation: glow-3 1s infinite;
+        }
+        .empat{
+            background-color:#2ecc71;
+            animation: glow-4 1s infinite;
+        }
+        .lima{
+            background-color: #c0392b;
+            animation: glow-1 1s infinite;
+        }
+        .enam{
+            background-color: #f1c40f;
+            animation: glow-2 1s infinite;
+        }
+        @keyframes glow-1 {
+          0%,
+          100% {
+            box-shadow: 0 0 20px 5px #c0392b;
+          }
+          50% {
+            box-shadow: none;
+          }
+        }
+        
+        @keyframes glow-2 {
+          0%,
+          100% {
+            box-shadow: none;
+          }
+          50% {
+            box-shadow: 0 0 20px 5px #f1c40f;
+          }
+        }
+        
+        @keyframes glow-3 {
+          0%,
+          100% {
+            box-shadow: 0 0 20px 5px #74f7e1;
+          }
+          50% {
+            box-shadow: none;
+          }
+        }
+        
+        @keyframes glow-4 {
+          0%,
+          100% {
+            box-shadow: none;
+          }
+          50% {
+            box-shadow: 0 0 20px 5px #2ecc71;
+          }
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+       <div class="lingkaran satu"  id="1"></div>
+       <div class="lingkaran dua"   id="2"></div>
+       <div class="lingkaran tiga"  id="3"></div>
+       <div class="lingkaran empat" id="4"></div>
+       <div class="lingkaran lima"  id="5"></div>
+       <div class="lingkaran enam"  id="6"></div>
+    </div>
+    <div class="control">
+        <div class="playStop">
+            <button id="play" onclick="play()">Play</button>
+            <button id="stop" onclick="berhenti()">Stop</button>
+        </div>
+        <div class="color-control">
+            <label for="colorPicker1">Lingkaran 1: </label>
+            <input type="color" name="colorPicker1" id="colorPicker1" onchange="changeColor(this.name,this.value)">
+            <label for="colorPicker2">Lingkaran 2: </label>
+            <input type="color" name="colorPicker2" id="colorPicker2" onchange="changeColor(this.name,this.value)">
+            <label for="colorPicker3">Lingkaran 3: </label>
+            <input type="color" name="colorPicker3" id="colorPicker3" onchange="changeColor(this.name,this.value)"><br>
+            <label for="colorPicker4">Lingkaran 4: </label>
+            <input type="color" name="colorPicker4" id="colorPicker4" onchange="changeColor(this.name,this.value)">
+            <label for="colorPicker5">Lingkaran 5: </label>
+            <input type="color" name="colorPicker5" id="colorPicker5" onchange="changeColor(this.name,this.value)">
+            <label for="colorPicker6">Lingkaran 6: </label>
+            <input type="color" name="colorPicker6" id="colorPicker6" onchange="changeColor(this.name,this.value)">
+        </div>
+        <div class="speedControl">
+            <input type="number" name="speed" id="speed" min="1" max="5" onchange="setInterval()">
+        </div>
+    </div>
+    <script>
+        // deklarasi lingkaran
+        let box1 = document.getElementById('1');
+        let box2 = document.getElementById('2');
+        let box3 = document.getElementById('3');
+        let box4 = document.getElementById('4');
+        let box5 = document.getElementById('5');
+        let box6 = document.getElementById('6');
+        
+
+        // deklarasi fungsi
+        let changeColor = undefined; // fungsi ganti warna lingkarn
+        let play = undefined;        // fungsi mulai animasi
+        let berhenti = undefined;    // fungsi berhenti animasi
+        let setInterval = undefined;    // fungsi set interval animasi
+
+
+        // fungsi ganti warna lingkaran
+        changeColor = (name,value) => {
+            switch (name) {
+                case "colorPicker1" :
+                    box1.style.backgroundColor = value;
+                    box1.style.boxShadow = "0 0 20px 5px"+value
+                    break;
+                case "colorPicker2" :
+                    box2.style.backgroundColor = value;
+                    box2.style.boxShadow = "0 0 20px 5px"+value
+                    break;
+                case "colorPicker3" :
+                    box3.style.backgroundColor = value;
+                    box3.style.boxShadow = "0 0 20px 5px"+value
+                    break;
+                case "colorPicker4" :
+                    box4.style.backgroundColor = value;
+                    box4.style.boxShadow = "0 0 20px 5px"+value
+                    break;
+                case "colorPicker5" :
+                    box5.style.backgroundColor = value;
+                    box5.style.boxShadow = "0 0 20px 5px"+value
+                    break;
+                case "colorPicker6" :
+                    box6.style.backgroundColor = value;
+                    box6.style.boxShadow = "0 0 20px 5px"+value
+                    break;
+            }
+        }
+        play = () => {
+            box1.style.animationPlayState = 'running';
+            box2.style.animationPlayState = 'running';
+            box3.style.animationPlayState = 'running';
+            box4.style.animationPlayState = 'running';
+            box5.style.animationPlayState = 'running';
+            box6.style.animationPlayState = 'running';
+        }
+        berhenti = () => {
+            box1.style.animationPlayState = 'paused';
+            box2.style.animationPlayState = 'paused';
+            box3.style.animationPlayState = 'paused';
+            box4.style.animationPlayState = 'paused';
+            box5.style.animationPlayState = 'paused';
+            box6.style.animationPlayState = 'paused';
+        }
+        setInterval = (value) => {
+            box1.style.animationDuration = value;
+            box2.style.animationDuration = value;
+            box3.style.animationDuration = value;
+            box4.style.animationDuration = value;
+            box5.style.animationDuration = value;
+            box6.style.animationDuration = value;
+            
+        }
+        let style = document.getElementsByTagName('style');
+        console.log(style);
+    </script>
+</body>
+</html>

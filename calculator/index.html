@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Calculator</title>
+</head>
+
+<body>
+    <div id='calc-contain'>
+
+        <form name="calculator">
+
+            <input id="text" type="text" name="answer" maxlength="8"/>
+            <br>
+
+            <input type="button" value=" 1 " onclick="fill(this.value)"/>
+            <input type="button" value=" 2 " onclick="fill(this.value)"/>
+            <input type="button" value=" 3 " onclick="fill(this.value)"/>
+            <input type="button" value=" + " onclick="operator(this.value)"/>
+            <br />
+            <input type="button" value=" 4 " onclick="fill(this.value)"/>
+            <input type="button" value=" 5 " onclick="fill(this.value)"/>
+            <input type="button" value=" 6 " onclick="fill(this.value)"/>
+            <input type="button" value=" - " onclick="operator(this.value)"/>
+            </br>
+            <input type="button" value=" 7 " onclick="fill(this.value)"/>
+            <input type="button" value=" 8 " onclick="fill(this.value)"/>
+            <input type="button" value=" 9 " onclick="fill(this.value)"/>
+            <input type="button" value=" x " onclick="operator(this.value)"/>
+            </br>
+            <input id="clear" type="button" value=" AC " onclick="hapus()"/>
+            <input type="button" value=" 0 " onclick="fill(this.value)"/>
+            <input type="button" value=" = " onclick="equal(this.value)"/>
+            <input type="button" value=" / " onclick="operator(this.value)"/>
+            </br>
+
+
+        </form>
+       
+    </div>
+    <script>
+        class hitung{
+            constructor(){
+                this.angka = [];
+                this.operator = undefined;
+            }
+
+            calc(){
+                let a = 0;
+                let aa,bb,cc,dd;
+                
+                switch (this.operator) {
+                case "+":
+                    this.angka.forEach(aa = (item) => {
+                        a += item;
+                    });
+                    return a;
+                    break;
+                case "-":
+                    this.angka.forEach(bb = (item,index,arr) => {
+                        a = arr[0] - arr[index];
+                    });
+                    return a;
+                    break;
+                case "x":
+                    this.angka.forEach(cc = (item,index,arr) => {
+                        a = arr[0] * arr[index];
+                    });
+                    return a;
+                    break;
+                case "/":
+                    this.angka.forEach(dd = (item,index,arr) => {
+                        a = arr[0] / arr[index];
+                    });
+                    return a;
+                    break;
+                default:
+                console.log('nilai belum lengkap');
+                    break;
+            }
+                
+            }
+            
+        }
+        let text = document.getElementById('text');
+        let isEqual = false;
+        let isClear = false;
+        let fill = undefined;
+        let clear = undefined;
+        let isOperator = undefined;
+        let hasil = undefined;
+        var kalkulasi = new hitung();
+        
+       
+        fill = (value) => {
+            if (isEqual) {
+                text.value = '';
+                isEqual = false;
+            }
+            if (isOperator) {
+                text.value = "";
+            }
+            text.value += value.trim();
+        }
+        hapus = (value) => {
+            if (!isClear) {
+                text.value = '';
+                kalkulasi.operator = undefined;
+                isOperator = false;
+                kalkulasi.angka = [];
+                
+            }else {
+                text.value = '';
+                isClear = false;
+                kalkulasi.angka = [];
+            }
+            
+
+        }
+
+        operator = (value) => {
+            kalkulasi.operator = value.trim();
+            
+            let angka = Number(text.value);
+            console.log(angka);
+            kalkulasi.angka.push(angka);
+            
+
+            if (isOperator) {
+                hasil = kalkulasi.calc();
+                text.value = hasil;
+            }else {
+                text.value = '';
+            }
+            isOperator = true;
+        }
+        equal = (value) => {
+            if (isOperator) {
+                let angka = Number(text.value);
+                kalkulasi.angka.push(angka);
+                hasil = kalkulasi.calc();
+                text.value = hasil;
+                kalkulasi.operator = "";
+                kalkulasi.angka = [];
+                isOperator = false;
+                isEqual = true;
+            }
+            
+        }
+            
+
+        
+    </script>
+</body>
+
+</html>

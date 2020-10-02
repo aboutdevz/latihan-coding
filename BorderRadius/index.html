@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Border Radius</title>
+</head>
+
+<body>
+    <h1>Control</h1>
+    <label for="">All radius</label>
+    <input type="range" name="range" id="range" min="0" max="50" step="5">
+    <label for="">Left top radius</label>
+    <input type="range" name="range" id="topleft" min="0" max="50" step="5">
+    <label for="">right top radius</label>
+    <input type="range" name="range" id="topright" min="0" max="50" step="5">
+    <label for="">right bottom radius</label>
+    <input type="range" name="range" id="bottomright" min="0" max="50" step="5">
+    <label for="">left bottom radius</label>
+    <input type="range" name="range" id="bottomleft" min="0" max="50" step="5">
+    <div style="text-align: center; color:white; background-color:blue; height: 90px; border: 5px solid green;"
+        id="div">
+        <h1>Change Me!!</h1>
+    </div>
+    <h4>The css</h4>
+    <textarea name="" id="css" cols="30" rows="10"></textarea><br>
+    <button id="buttongetcss">Get css</button>
+    <button id="buttoncopy">Copy</button>
+</body>
+<script>
+    var slider = document.getElementById('range');
+    var border = document.getElementById('div');
+    var topleft = document.getElementById('topleft');
+    var topright = document.getElementById('topright');
+    var bottomright = document.getElementById('bottomright');
+    var bottomleft = document.getElementById('bottomleft');
+    var css = document.getElementById('css');
+    var buttongetcss = document.getElementById('buttongetcss');
+    var buttoncopy = document.getElementById('buttoncopy');
+    border.style.borderRadius = slider.value + '%';
+    slider.oninput = function () {
+        border.style.borderRadius = this.value + '%';
+        topleft.attributes.
+        border.style
+    }
+    topleft.oninput = function () {
+        border.style.borderTopLeftRadius = this.value + '%';
+    }
+    topright.oninput = function () {
+        border.style.borderTopRightRadius = this.value + '%';
+    }
+    bottomright.oninput = function () {
+        border.style.borderBottomRightRadius = this.value + '%';
+    }
+    bottomleft.oninput = function () {
+        border.style.borderBottomLeftRadius = this.value + '%';
+    }
+
+    buttongetcss.onclick = function () {
+        css.value = "";
+        css.value += 'background-color:' + border.style.backgroundColor + ';' + '\n';
+        css.value += 'border:' + border.style.border + ';' + '\n';
+        css.value += 'border-radius:' +
+            border.style.borderTopLeftRadius + ' ' +
+            border.style.borderTopRightRadius + ' ' +
+            border.style.borderBottomRightRadius + ' ' +
+            border.style.borderBottomLeftRadius + ';' + '\n';
+    }
+    buttoncopy.onclick = function () {
+        css.select();
+        css.setSelectionRange(0, 99999);
+        document.execCommand('copy');
+
+        alert("copied text" + css.value);
+
+    }
+
+
+
+</script>
+
+</html>
